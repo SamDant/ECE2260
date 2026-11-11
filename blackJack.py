@@ -64,4 +64,72 @@ def play_hand(deck,stand_on=17):
         return -1.0
     return 0.0
 
+def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
+    """Run independent hands and summarize results for this policy."""
+    if not isinstance(n_trials, int) or n_trials < 2:
+        raise ValueError("n_trials must be an integer of at least 2.")
+    if not isinstance(stand_on, int) or not 2 <= stand_on <= 21:
+        raise ValueError("stand_on must be an integer from 2 through 21.")
 
+    # Initialize ONCE, outside the loop. Re-seeding each hand repeats it.
+    rng = random.Random(seed)
+    wins = losses = pushes = 0
+    total_profit = 0.0
+    total_profit_squared = 0.0
+
+    for _ in range(n_trials):
+        deck = make_deck(rng)
+        profit = play_hand(deck, stand_on)
+
+        if profit > 0:
+            wins += 1
+        elif profit < 0:
+            losses += 1
+        else:
+            pushes += 1
+
+        total_profit += profit
+        total_profit_squared += profit ** 2
+
+    mean_profit = total_profit / n_trials
+    sample_variance = max(
+        0.0,
+        (total_profit_squared - n_trials * mean_profit ** 2) / (n_trials - 1),
+    )
+    standard_error = math.sqrt(sample_variance / n_trials)
+
+    return {
+        "hands": n_trials,
+        "wins": wins,
+        "losses": losses,
+        "pushes": pushes,
+        "win_rate": wins / n_trials,
+        "loss_rate": losses / n_trials,
+        "push_rate": pushes / n_trials,
+        "mean_profit": mean_profit,
+        "standard_error": standard_error,
+        "ci95_low": mean_profit - 1.96 * standard_error,
+        "ci95_high": mean_profit + 1.96 * standard_error,
+    }
+
+def main():
+    stats = simulate()
+    print("Simplified blackjack Monte Carlo simulation")
+    print("Fresh single deck per hand; dealer stands on all 17s; 3:2 blackjack.")
+    print("Fixed 1-unit stake; hit/stand only; no split/double/surrender/insurance.")
+    print(f"Player policy: hit below {STAND_ON}; stand at {STAND_ON} or higher.")
+    print(f"Hands: {stats['hands']:,} | Seed: {SEED}")
+    print(f"Win rate:  {stats['win_rate']:.2%} ({stats['wins']:,} hands)")
+    print(f"Loss rate: {stats['loss_rate']:.2%} ({stats['losses']:,} hands)")
+    print(f"Push rate: {stats['push_rate']:.2%} ({stats['pushes']:,} hands)")
+    print(f"Average net profit: {stats['mean_profit']:+.5f} units per hand")
+    print(f"Average net return per initial stake: {stats['mean_profit']:+.2%}")
+    print(
+        "Approx. 95% confidence interval for mean profit: "
+        f"[{stats['ci95_low']:+.5f}, {stats['ci95_high']:+.5f}] units per hand"
+    )
+    print("The interval measures sampling uncertainty under this model.")
+
+
+if __name__ == "__main__":
+    main()
