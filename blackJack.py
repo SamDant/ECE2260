@@ -1,5 +1,11 @@
 import math
 import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import array
+
 
 #settings decleration
 N_TRIALS=100000
@@ -117,31 +123,31 @@ def main():
     print("Simplified blackjack Monte Carlo simulation")
     print("Fresh single deck per hand; dealer stands on all 17s; 3:2 blackjack.")
     print("Fixed 1-unit stake; hit/stand only; no split/double/surrender/insurance.")
-    
-    sOn=5;
+    stats=[]    
+    sOn=5
+    i=0
     while sOn<21:
-        print("-----NEXT SIM-----")
         print()
-        stats = simulate(N_TRIALS,sOn,SEED)
+        print("-----NEXT SIM-----")
+        stats.append(simulate(N_TRIALS,sOn,SEED))
         print(f"Player policy: hit below {sOn}; stand at {sOn} or higher.")
-        print(f"Hands: {stats['hands']:,} | Seed: {SEED}")
-        print(f"Win rate:  {stats['win_rate']:.2%} ({stats['wins']:,} hands)")
-        print(f"Loss rate: {stats['loss_rate']:.2%} ({stats['losses']:,} hands)")
-        print(f"Push rate: {stats['push_rate']:.2%} ({stats['pushes']:,} hands)")
-        print(f"Average net profit: {stats['mean_profit']:+.5f} units per hand")
-        print(f"Average net return per initial stake: {stats['mean_profit']:+.2%}")
+        print(f"Hands: {stats[i]['hands']:,} | Seed: {SEED}")
+        print(f"Win rate:  {stats[i]['win_rate']:.2%} ({stats[i]['wins']:,} hands)")
+        print(f"Loss rate: {stats[i]['loss_rate']:.2%} ({stats[i]['losses']:,} hands)")
+        print(f"Push rate: {stats[i]['push_rate']:.2%} ({stats[i]['pushes']:,} hands)")
+        print(f"Average net profit: {stats[i]['mean_profit']:+.5f} units per hand")
+        print(f"Average net return per initial stake: {stats[i]['mean_profit']:+.2%}")
         print(
             "Approx. 95% confidence interval for mean profit: "
-            f"[{stats['ci95_low']:+.5f}, {stats['ci95_high']:+.5f}] units per hand"
+            f"[{stats[i]['ci95_low']:+.5f}, {stats[i]['ci95_high']:+.5f}] units per hand"
         )
         sOn+=1
-
-
-
-
+        i+=1
+        print()
 
     print("The interval measures sampling uncertainty under this model.")
-
+    for n in stats:
+        print(stats[n].values()) #want to do this in csv. this doesnt work
 
 if __name__ == "__main__":
     main()
