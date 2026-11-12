@@ -113,21 +113,33 @@ def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
     }
 
 def main():
-    stats = simulate()
+    #stats = simulate()
     print("Simplified blackjack Monte Carlo simulation")
     print("Fresh single deck per hand; dealer stands on all 17s; 3:2 blackjack.")
     print("Fixed 1-unit stake; hit/stand only; no split/double/surrender/insurance.")
-    print(f"Player policy: hit below {STAND_ON}; stand at {STAND_ON} or higher.")
-    print(f"Hands: {stats['hands']:,} | Seed: {SEED}")
-    print(f"Win rate:  {stats['win_rate']:.2%} ({stats['wins']:,} hands)")
-    print(f"Loss rate: {stats['loss_rate']:.2%} ({stats['losses']:,} hands)")
-    print(f"Push rate: {stats['push_rate']:.2%} ({stats['pushes']:,} hands)")
-    print(f"Average net profit: {stats['mean_profit']:+.5f} units per hand")
-    print(f"Average net return per initial stake: {stats['mean_profit']:+.2%}")
-    print(
-        "Approx. 95% confidence interval for mean profit: "
-        f"[{stats['ci95_low']:+.5f}, {stats['ci95_high']:+.5f}] units per hand"
-    )
+    
+    sOn=5;
+    while sOn<21:
+        print("-----NEXT SIM-----")
+        print()
+        stats = simulate(N_TRIALS,sOn,SEED)
+        print(f"Player policy: hit below {sOn}; stand at {sOn} or higher.")
+        print(f"Hands: {stats['hands']:,} | Seed: {SEED}")
+        print(f"Win rate:  {stats['win_rate']:.2%} ({stats['wins']:,} hands)")
+        print(f"Loss rate: {stats['loss_rate']:.2%} ({stats['losses']:,} hands)")
+        print(f"Push rate: {stats['push_rate']:.2%} ({stats['pushes']:,} hands)")
+        print(f"Average net profit: {stats['mean_profit']:+.5f} units per hand")
+        print(f"Average net return per initial stake: {stats['mean_profit']:+.2%}")
+        print(
+            "Approx. 95% confidence interval for mean profit: "
+            f"[{stats['ci95_low']:+.5f}, {stats['ci95_high']:+.5f}] units per hand"
+        )
+        sOn+=1
+
+
+
+
+
     print("The interval measures sampling uncertainty under this model.")
 
 
