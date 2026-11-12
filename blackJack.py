@@ -17,7 +17,7 @@ def make_deck(rng):
 
 #optimize hand if an ace is present
 def hand_value(hand):
-    tital=sum(hand)
+    total=sum(hand)
     aces=hand.count(11)
 
     while total>21 and aces>0:
