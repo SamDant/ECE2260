@@ -31,10 +31,26 @@ def hand_value(hand):
         aces-=1
     return total
 
-#baseline logic. true means hit, false means stand. 
-#    This first policy ignores dealer_upcard, but it is available for a future strategy. The policy only receives information the player sees.
+#baseline logic. true means hit, false means stand.
+#def player_should_hit(hand, dealer_upcard, stand_on):
+#   return hand_value(hand)<stand_on
+#This first policy ignores dealer_upcard, but it is available for a future strategy. The policy only receives information the player sees.
+#
+#New policy. includes dealer upcard logic
+#Based on the dealers upcard, what should the player do?
+
+#looks at dealers upcard and determines based on probability the percent chance of winning based on the upcard
+#then based on that probability that would be taken into account, depending on your card value
 def player_should_hit(hand, dealer_upcard, stand_on):
-    return hand_value(hand)<stand_on
+    total = hand_value(hand)
+
+    if total > 21:
+        return False
+
+    if total < stand_on:
+        return True
+
+    return dealer_upcard > 6
 
 #play one hand and return net profint per 1-unit initial stake
 def play_hand(deck,stand_on=17):
@@ -45,19 +61,24 @@ def play_hand(deck,stand_on=17):
 
     player_blackjack=hand_value(player)==21
     dealer_blackjack=hand_value(dealer)==21
-
+    #check blackjjack
     if player_blackjack and dealer_blackjack:
         return 0.0
     if dealer_blackjack:
         return -1.0;
     if player_blackjack:
-        return 1.0
+        return 1.5
 
-    while player_should_hit(player,dealer[0],stand_on):
+    #player turn
+    while player_should_hit(player, dealer[0], stand_on):
+        extra_hit = (dealer[0] > 6 and hand_value(player) >= stand_on)
         player.append(deck.pop())
-        if hand_value(player)>21:
+        if hand_value(player) > 21:
             return -1.0
+        if extra_hit:
+            break
 
+    #dealers turn
     while hand_value(dealer)<17:
         dealer.append(deck.pop())
 
@@ -69,6 +90,7 @@ def play_hand(deck,stand_on=17):
     if player_total < dealer_total:
         return -1.0
     return 0.0
+
 
 def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
     """Run independent hands and summarize results for this policy."""
@@ -116,6 +138,7 @@ def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
         "standard_error": standard_error,
         "ci95_low": mean_profit - 1.96 * standard_error,
         "ci95_high": mean_profit + 1.96 * standard_error,
+        "stand_on": stand_on,
     }
 
 def main():
@@ -141,13 +164,16 @@ def main():
             "Approx. 95% confidence interval for mean profit: "
             f"[{stats[i]['ci95_low']:+.5f}, {stats[i]['ci95_high']:+.5f}] units per hand"
         )
-        sOn+=1
-        i+=1
+
+        sOn += 1
+        i += 1
         print()
 
+    # These lines are OUTSIDE the while loop, but INSIDE main().
     print("The interval measures sampling uncertainty under this model.")
-    for n in stats:
-        print(stats[n].values()) #want to do this in csv. this doesnt work
+
+    pd.DataFrame(stats).to_csv("blackjack_results.csv", index=False)
+    print("Saved results to blackjack_results.csv")
 
 if __name__ == "__main__":
     main()
