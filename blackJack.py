@@ -139,35 +139,40 @@ def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
         "ci95_low": mean_profit - 1.96 * standard_error,
         "ci95_high": mean_profit + 1.96 * standard_error,
         "stand_on": stand_on,
+        "seed": seed,
     }
 
 def main():
     #stats = simulate()
     print("Simplified blackjack Monte Carlo simulation")
+    seed = int(input("Enter the random seed: "))
     print("Fresh single deck per hand; dealer stands on all 17s; 3:2 blackjack.")
     print("Fixed 1-unit stake; hit/stand only; no split/double/surrender/insurance.")
+    showVals=int(input("Would you like to display each run in terminal? Y=1/n=0: "))
     stats=[]    
     sOn=5
     i=0
+    if seed ==0:
+                 seed=SEED
     while sOn<21:
-        print()
-        print("-----NEXT SIM-----")
-        stats.append(simulate(N_TRIALS,sOn,SEED))
-        print(f"Player policy: hit below {sOn}; stand at {sOn} or higher.")
-        print(f"Hands: {stats[i]['hands']:,} | Seed: {SEED}")
-        print(f"Win rate:  {stats[i]['win_rate']:.2%} ({stats[i]['wins']:,} hands)")
-        print(f"Loss rate: {stats[i]['loss_rate']:.2%} ({stats[i]['losses']:,} hands)")
-        print(f"Push rate: {stats[i]['push_rate']:.2%} ({stats[i]['pushes']:,} hands)")
-        print(f"Average net profit: {stats[i]['mean_profit']:+.5f} units per hand")
-        print(f"Average net return per initial stake: {stats[i]['mean_profit']:+.2%}")
-        print(
-            "Approx. 95% confidence interval for mean profit: "
-            f"[{stats[i]['ci95_low']:+.5f}, {stats[i]['ci95_high']:+.5f}] units per hand"
-        )
-
+        stats.append(simulate(N_TRIALS,sOn,seed))
+        if showVals==1:
+            print()
+            print("-----NEXT SIM-----")
+            print(f"Player policy: hit below {sOn}; stand at {sOn} or higher.")
+            print(f"Hands: {stats[i]['hands']:,} | Seed: {SEED}")
+            print(f"Win rate:  {stats[i]['win_rate']:.2%} ({stats[i]['wins']:,} hands)")
+            print(f"Loss rate: {stats[i]['loss_rate']:.2%} ({stats[i]['losses']:,} hands)")
+            print(f"Push rate: {stats[i]['push_rate']:.2%} ({stats[i]['pushes']:,} hands)")
+            print(f"Average net profit: {stats[i]['mean_profit']:+.5f} units per hand")
+            print(f"Average net return per initial stake: {stats[i]['mean_profit']:+.2%}")
+            print(
+                "Approx. 95% confidence interval for mean profit: "
+                f"[{stats[i]['ci95_low']:+.5f}, {stats[i]['ci95_high']:+.5f}] units per hand"
+            )
+            print()
         sOn += 1
         i += 1
-        print()
 
     # These lines are OUTSIDE the while loop, but INSIDE main().
     print("The interval measures sampling uncertainty under this model.")
