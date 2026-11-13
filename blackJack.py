@@ -51,7 +51,7 @@ def play_hand(deck,stand_on=17):
     if dealer_blackjack:
         return -1.0;
     if player_blackjack:
-        return 1.5
+        return 1.0
 
     while player_should_hit(player,dealer[0],stand_on):
         player.append(deck.pop())
