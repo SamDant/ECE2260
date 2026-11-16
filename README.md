@@ -19,8 +19,8 @@ The simulation will test players standing from numbers 3-20 (this is considered 
 The players will always hit if the hand total is less than the threshold
 Once the threshold is reach, the player will stand if the dealers upcard is 2 through 6
 If the dealer’s upcard is 7 through Ace, and the player’s hand total is greater than or equal to 17, the player will take one additional card, and then stop.
-Reason for Player Standing or Hitting
-We first came up with these rules after reading the article: “Unlock Winning Strategies: Learn to Leverage the Dealer’s Upcard in Blackjack”, and it recommended if the dealer’s upcard was 2-6 to stand, and higher than 6 to hit. So we decided to run a simulation with 100,000 trial per upcard to see the expected probabilities and the results were as follow:
+## *Reason for Player Standing or Hitting*
+We first came up with these rules after reading the article: “Unlock Winning Strategies: Learn to Leverage the Dealer’s Upcard in Blackjack”[i], and it recommended if the dealer’s upcard was 2-6 to stand, and higher than 6 to hit. So we decided to run a simulation with 100,000 trial per upcard to see the expected probabilities and the results were as follow:
 
 *Table 1*
 | Dealer's Upcard | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 
@@ -33,4 +33,7 @@ As seen in Table 1 when a dealer shows a low card (2-6) they have a higher chanc
 Since there are only 2 options in blackjack for the dealer bust, or reach their range of (17-21). We can determine the probability of reach threshold is:  100 - Bust Rate % , we have the bust rate for the simulation, the results for getting 17-21 are displayed in Table 1.
 
 Following that logic we can see from the data in Table 1 that whenever a dealer shows a high card (7-Ace) they have a higher chance of getting a hand value that they can stand on (17-21). And we decided they should take the extra hit in this project.
- 
+
+
+## References
+[1] V. H. Royer, “Unlock winning strategies: Learn to leverage the dealer’s upcard in blackjack,” Casino.org, Sep. 30, 2024. Accessed: Nov. 16, 2026. [Online]. Available:[https://www.casino.org/blog/dealers-upcard-blackjack/](https://www.casino.org/blog/dealers-upcard-blackjack/) 
