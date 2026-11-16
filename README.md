@@ -13,7 +13,7 @@ For our game the dealer is instructed that they must hit on anything lower than 
 
 As for expected net units please refer to [Expected Net Return and Monte Carlo Explanations](https://docs.google.com/document/d/103JBr-ownDSd63dBVNNg6Gm51m3ouOhEO3hXnW1Rpm4/edit?tab=t.0#heading=h.o7010k5jmm7p).
 
-##*How the Monte Carlo Simulation will work:*
+## *How the Monte Carlo Simulation will work:*
 
 The simulation will test players standing from numbers 3-20 (this is considered the threshold), under each strategy the logic is as follow:
 The players will always hit if the hand total is less than the threshold
