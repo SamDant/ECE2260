@@ -1,3 +1,4 @@
+#impprt needed libraries
 import math
 import random
 import numpy as np
@@ -7,15 +8,15 @@ import seaborn as sns
 import array
 
 
-#settings decleration
+#global settings decleration 
 N_TRIALS=100000
 STAND_ON=17
-SEED=42 #
+SEED=42 #Ensures repeatable hands so that different stand_on values can be compared accuratly. Using the same seed allowseach strategy to be tested against the same sequence of shuffled decks.
 
-# Each suit has one Ace and four 10-valued cards: 10, Jack, Queen, King.
+#Declaring base values for one suit. Each suit has one Ace and four 10-valued cards: 10, Jack, Queen, King.
 CARD_VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
 
-#Create and shuffle a new deck. pop() will draw without replacement.
+#Create and shuffle a new deck. pop() draws without replacement. Assumed this as the odds to redraw a card are near zero.
 def make_deck(rng):
     deck=CARD_VALUES*4
     rng.shuffle(deck)
@@ -31,37 +32,40 @@ def hand_value(hand):
         aces-=1
     return total
 
-#baseline logic. true means hit, false means stand.
+#Baseline strategy. True means hit, false means stand.
+
 #def player_should_hit(hand, dealer_upcard, stand_on):
 #   return hand_value(hand)<stand_on
-#This first policy ignores dealer_upcard, but it is available for a future strategy. The policy only receives information the player sees.
-#
-#New policy. includes dealer upcard logic
+
+#This first strategy ignores the  dealer_upcard, but this variable is available for a future strategy. The strategy only receives information the player sees.
+
+#New strategy. includes dealer_upcard logic
 #Based on the dealers upcard, what should the player do?
 
-#looks at dealers upcard and determines based on probability the percent chance of winning based on the upcard
-#then based on that probability that would be taken into account, depending on your card value
+#Looks at dealers upcard and determines, based on probability, the percent chance of dealer busting with the upcard.
+#Based on that probability, the strategy decides to hit or stand depending on your card value and dealer_upcard
 def player_should_hit(hand, dealer_upcard, stand_on):
     total = hand_value(hand)
-
+    #If bust, dont hit
     if total > 21:
         return False
-
+    #If not at stand_on value, hit
     if total < stand_on:
         return True
-
+    #If not at stand_on value, but total is >=17 and dealer upcard is at least a 7, hit
     return dealer_upcard > 6 and total>=17
 
-#play one hand and return net profint per 1-unit initial stake
+#Play one hand and return net profint per 1-unit initial stake
 def play_hand(deck,stand_on=17):
+    #Deal hand
     player=[deck.pop()]
     dealer=[deck.pop()]
     player.append(deck.pop())
     dealer.append(deck.pop())
-
+    #Define blackjack
     player_blackjack=hand_value(player)==21
     dealer_blackjack=hand_value(dealer)==21
-    #check blackjjack
+    #Check blackjack
     if player_blackjack and dealer_blackjack:
         return 0.0
     if dealer_blackjack:
@@ -69,7 +73,7 @@ def play_hand(deck,stand_on=17):
     if player_blackjack:
         return 1.0
 
-    #player turn
+    #Player turn
     while player_should_hit(player, dealer[0], stand_on):
         extra_hit = (dealer[0] > 6 and hand_value(player) >= stand_on)
         player.append(deck.pop())
@@ -78,7 +82,7 @@ def play_hand(deck,stand_on=17):
         if extra_hit:
             break
 
-    #dealers turn
+    #Dealer turn
     while hand_value(dealer)<17:
         dealer.append(deck.pop())
 
@@ -91,7 +95,7 @@ def play_hand(deck,stand_on=17):
         return -1.0
     return 0.0
 
-
+#Run a full simulation (eg play # of hands with a given strategy and calculate results)
 def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
     """Run independent hands and summarize results for this policy."""
     if not isinstance(n_trials, int) or n_trials < 2:
@@ -143,7 +147,7 @@ def simulate(n_trials=N_TRIALS, stand_on=STAND_ON, seed=SEED):
     }
 
 def main():
-    #stats = simulate()
+    #UI and simulation call
     print("Simplified blackjack Monte Carlo simulation")
     seed = int(input("Enter the random seed: "))
     print("Fresh single deck per hand; dealer stands on all 17s; 3:2 blackjack.")
@@ -174,9 +178,7 @@ def main():
         sOn += 1
         i += 1
 
-    # These lines are OUTSIDE the while loop, but INSIDE main().
     print("The interval measures sampling uncertainty under this model.")
-
     pd.DataFrame(stats).to_csv("blackjack_results.csv", index=False)
     print("Saved results to blackjack_results.csv")
 
