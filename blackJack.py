@@ -50,7 +50,7 @@ def player_should_hit(hand, dealer_upcard, stand_on):
     if total < stand_on:
         return True
 
-    return dealer_upcard > 6
+    return dealer_upcard > 6 and total>=17
 
 #play one hand and return net profint per 1-unit initial stake
 def play_hand(deck,stand_on=17):
@@ -150,7 +150,7 @@ def main():
     print("Fixed 1-unit stake; hit/stand only; no split/double/surrender/insurance.")
     showVals=int(input("Would you like to display each run in terminal? Y=1/n=0: "))
     stats=[]    
-    sOn=5
+    sOn=3
     i=0
     if seed ==0:
                  seed=SEED
