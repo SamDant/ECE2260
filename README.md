@@ -34,6 +34,47 @@ Since there are only 2 options in blackjack for the dealer bust, or reach their 
 
 Following that logic we can see from the data in Table 1 that whenever a dealer shows a high card (7-Ace) they have a higher chance of getting a hand value that they can stand on (17-21). And we decided they should take the extra hit in this project.
 
+## How to use this code
+
+The monteCarlo.py file is a basic example of a Montecarlo simulation. 
+The blackJack.py file is the simulation for the conditions outlined in this file and the project.
+The bust rate.py file calculates the bust rate of the dealer based on their upcard.
+The plotResults.py file takes the genrated CSV files and outputs two plots: one of the blackJack.py output and the other of the bust rate.py output 
+The strategyHeat.py file is a hardcoded script that generates a heatmap of all hit stand situations
+
+
+In order to display the results as plots, run: 
+``
+source venv/bin/activate
+``
+to set up the virtual enviornment.
+
+Then run:
+``
+python blackJack.py
+``
+This program will ask you for a seed and if you would like to display the results live in the terminal. 
+Respond to it, and it will output the results to a csv file.
+
+Then run:
+``
+python bust_rate.py
+``
+The results from this scrip will be stored in a CSV file.
+
+Once that is done, run:
+``
+python plotResults.py
+``
+The plots will apear on screen and be saved as .png files in the working directory.
+
+
+If you want the strategy heatmap, run:
+``
+python strategyHeat.py
+``
+The heatmap will then show up on screen and be saved as a .png to the working directory.
+
 
 ## References
 [1] V. H. Royer, “Unlock winning strategies: Learn to leverage the dealer’s upcard in blackjack,” Casino.org, Sep. 30, 2024. Accessed: Nov. 13, 2026. [Online]. Available:[https://www.casino.org/blog/dealers-upcard-blackjack/](https://www.casino.org/blog/dealers-upcard-blackjack/) 
