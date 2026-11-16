@@ -150,7 +150,7 @@ def main():
     #UI and simulation call
     print("Simplified blackjack Monte Carlo simulation")
     seed = int(input("Enter the random seed: "))
-    print("Fresh single deck per hand; dealer stands on all 17s; 3:2 blackjack.")
+    print("Fresh single deck per hand; dealer stands on all 17s; 1:1 blackjack.")
     print("Fixed 1-unit stake; hit/stand only; no split/double/surrender/insurance.")
     showVals=int(input("Would you like to display each run in terminal? Y=1/n=0: "))
     stats=[]    
