@@ -20,43 +20,12 @@ Once the threshold is reach, the player will stand if the dealers upcard is 2 th
 If the dealer’s upcard is 7 through Ace, and the player’s hand total is greater than or equal to 17, the player will take one additional card, and then stop.
 Reason for Player Standing or Hitting
 We first came up with these rules after reading the article: “Unlock Winning Strategies: Learn to Leverage the Dealer’s Upcard in Blackjack”, and it recommended if the dealer’s upcard was 2-6 to stand, and higher than 6 to hit. So we decided to run a simulation with 100,000 trial per upcard to see the expected probabilities and the results were as follow:
+
 *Table 1*
 | Dealer's Upcard | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | ---: |
-| Left aligned | Centered | Right aligned |
-| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
-
-5
-6
-7
-8
-9
-10
-11
-Bust Rate %
-35.05
-37.29
-39.20
-41.84
-41.98
-26.53
-24.57
-23.09
-21.19
-11.68
-Getting
-(17 - 21)
-64.95
-62.71
-60.80
-58.16
-58.02
-73.47
-75.43
-76.91
-78.81
-88.32
-
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Bist Rate % | 35.05 | 37.29 | 39.20 | 41.84 | 41.98 | 26.53 | 24.57 | 23.09 | 21.19 | 11.68 |
+| Getting (17-21) | 64.95 | 62.71 | 60.80 | 58.16 | 58.02 | 73.47 | 75.43 | 76.91 | 78.81 | 88.32 |
 
 As seen in Table 1 when a dealer shows a low card (2-6) they have a higher chance of busting, the reason the percentage is so high is because they need to draw multiple times to reach the 17 that they must stand on.
 
