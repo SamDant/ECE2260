@@ -13,18 +13,19 @@ For our game the dealer is instructed that they must hit on anything lower than 
 
 As for expected net units please refer to [Expected Net Return and Monte Carlo Explanations](https://docs.google.com/document/d/103JBr-ownDSd63dBVNNg6Gm51m3ouOhEO3hXnW1Rpm4/edit?tab=t.0#heading=h.o7010k5jmm7p).
 
-###How the Monte Carlo Simulation will work:
+##*How the Monte Carlo Simulation will work:*
 The simulation will test players standing from numbers 3-20 (this is considered the threshold), under each strategy the logic is as follow:
 The players will always hit if the hand total is less than the threshold
 Once the threshold is reach, the player will stand if the dealers upcard is 2 through 6
 If the dealer’s upcard is 7 through Ace, and the player’s hand total is greater than or equal to 17, the player will take one additional card, and then stop.
 Reason for Player Standing or Hitting
 We first came up with these rules after reading the article: “Unlock Winning Strategies: Learn to Leverage the Dealer’s Upcard in Blackjack”, and it recommended if the dealer’s upcard was 2-6 to stand, and higher than 6 to hit. So we decided to run a simulation with 100,000 trial per upcard to see the expected probabilities and the results were as follow:
-Table 1
-Dealer’s Upcard
-2
-3
-4
+*Table 1*
+| Dealer's Upcard | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | ---: |
+| Left aligned | Centered | Right aligned |
+| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
+
 5
 6
 7
