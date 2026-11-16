@@ -43,16 +43,20 @@ The plotResults.py file takes the genrated CSV files and outputs two plots: one 
 The strategyHeat.py file is a hardcoded script that generates a heatmap of all hit stand situations
 
 
-In order to display the results as plots, run: 
+In order to display the results as plots, run:
+ 
 ``
 source venv/bin/activate
 ``
+
 to set up the virtual enviornment.
 
 Then run:
+
 ``
 python blackJack.py
 ``
+
 This program will ask you for a seed and if you would like to display the results live in the terminal. 
 Respond to it, and it will output the results to a csv file.
 
