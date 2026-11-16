@@ -36,4 +36,4 @@ Following that logic we can see from the data in Table 1 that whenever a dealer 
 
 
 ## References
-[1] V. H. Royer, “Unlock winning strategies: Learn to leverage the dealer’s upcard in blackjack,” Casino.org, Sep. 30, 2024. Accessed: Nov. 16, 2026. [Online]. Available:[https://www.casino.org/blog/dealers-upcard-blackjack/](https://www.casino.org/blog/dealers-upcard-blackjack/) 
+[1] V. H. Royer, “Unlock winning strategies: Learn to leverage the dealer’s upcard in blackjack,” Casino.org, Sep. 30, 2024. Accessed: Nov. 13, 2026. [Online]. Available:[https://www.casino.org/blog/dealers-upcard-blackjack/](https://www.casino.org/blog/dealers-upcard-blackjack/) 
