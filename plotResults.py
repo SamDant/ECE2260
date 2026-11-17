@@ -19,6 +19,22 @@ plot.tight_layout()
 plot.savefig("blackJack_winRatexStandOn.png")
 plot.show()
 
+#plot 2 for blackjack_results.csv
+
+plot.figure(figsize=(10,8))
+plot.bar(df["stand_on"],df["mean_profit"],color="steelblue")
+
+seed=df["seed"]
+
+plot.title("Player Mean Profit by Hand Value to Stand with given seed: "+str(seed[0]))
+plot.xlabel("Stand On")
+plot.ylabel("Mean Profit (Given 1 unit initial stake)")
+plot.tight_layout()
+
+
+plot.savefig("blackJack_winRatexMeanProfit.png")
+plot.show()
+
 #plot for dealer_bust_rates.csv
 
 df2=pd.read_csv("dealer_bust_rates.csv")
