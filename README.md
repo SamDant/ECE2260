@@ -86,13 +86,17 @@ For this project we will define random variable R as the net return from one one
 
 | Loss = -1           R = -1 | Push = 0       (R = 0) | Win = +1           R = +1 |
 | :---: | :---: | :---: |
+
+
 Thus the theoretical expected net return would be probability of winning a hand - probability of losing a hand which is represented as: E[R] = P(win) - P(loss)
 
 ## *Empirical Probability/ Law of Large Numbers in Monte Carlo Simulations* 
 For the Monte Carlo simulation we are going to be relying on Empirical Probability which estimates the likelihood of an outcome based on a large number of trials. Thus the formula is the following:
+
 $$
-P(win) =\frac{Numbers of Hands won}{Total number of hands played}
+\text{P(win)} =\frac{\text{Numbers of Hands won}}{\text{Total number of hands played}}
 $$
+
 P(win) is represented as the estimated probability
 
 To estimate the quality, the Monte Carlo program runs a simulation of 100,000 hands per each strategy, and we use multiple trials to estimate the underlying probability due to the Law of Large Numbers. Which states that as the number of independent trials increases, the win proportion converges to the true win probability, similar to the graph in extra credit question 8 in slide set 16.
