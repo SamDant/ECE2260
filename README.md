@@ -83,30 +83,31 @@ The expected net probabilities change every time whenever a new card is drawn so
 For this project we will define random variable R as the net return from one one hand. And the possible outcomes are as follow:
 
 *Table 3*
-| Loss = -1           R = -1 | Push = 0       (R = 0) | Win = +1           R = +1 |
 
+| Loss = -1           R = -1 | Push = 0       (R = 0) | Win = +1           R = +1 |
+| :---: | :---: | :---: |
 Thus the theoretical expected net return would be probability of winning a hand - probability of losing a hand which is represented as: E[R] = P(win) - P(loss)
 
 ## *Empirical Probability/ Law of Large Numbers in Monte Carlo Simulations* 
 For the Monte Carlo simulation we are going to be relying on Empirical Probability which estimates the likelihood of an outcome based on a large number of trials. Thus the formula is the following:
-$
+$$
 P(win) =\frac{Numbers of Hands won}{Total number of hands played}
-$
+$$
 P(win) is represented as the estimated probability
 
 To estimate the quality, the Monte Carlo program runs a simulation of 100,000 hands per each strategy, and we use multiple trials to estimate the underlying probability due to the Law of Large Numbers. Which states that as the number of independent trials increases, the win proportion converges to the true win probability, similar to the graph in extra credit question 8 in slide set 16.
 
 ##*Sample mean for net return*
-With those results that we get from the Simulation it records the net return from each hand, which we will call $R_i$. Then using the $R_i$ for each hand we will calculate the sample mean to estimate the strategy's overall expected net return. Which is represented as the following formula:
-$
+With those results that we get from the Simulation it records the net return from each hand, which we will call $$R_i$$. Then using the $$R_i$$ for each hand we will calculate the sample mean to estimate the strategy's overall expected net return. Which is represented as the following formula:
+$$
 Average R = \frac{1}{n} \sum_{i=1}^{n}R_i
-$
+$$
 
 Confidence Interval
 For safety we also use a 95% confidence interval, we use a confidence interval to describe sampling uncertainty in the mean return. Because it measures how much the estimates can possibly vary because the simulation uses a certain number of random hands. We use the confidence interval for the mean return using Standard Deviation. Which is represented as the following formula:
-$
+$$
 Confidence Interval= Net R \pm 1.96 \frac{s}{\sqrt{n}}
-$
+$$
 s is the the standard deviation of the return
 
 By comparing the estimated Net Return for all the different strategies/thresholds we are able to find which strategy gives the most viable return.
