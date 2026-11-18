@@ -2,7 +2,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from blackjack import player_should_hit
+from blackJack import player_should_hit
 STAND_ON = 12 
 
 #Labels
