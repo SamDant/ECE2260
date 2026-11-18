@@ -53,7 +53,7 @@ def player_should_hit(hand, dealer_upcard, stand_on):
     if total < stand_on:
         return True
     #If not at stand_on value, but total is >=17 and dealer upcard is at least a 7, hit
-    return dealer_upcard > 6 and total>=17
+    return dealer_upcard > 6 and total<17
 
 #Play one hand and return net profint per 1-unit initial stake
 def play_hand(deck,stand_on=17):
@@ -79,8 +79,7 @@ def play_hand(deck,stand_on=17):
         player.append(deck.pop())
         if hand_value(player) > 21:
             return -1.0
-        if extra_hit:
-            break
+
 
     #Dealer turn
     while hand_value(dealer)<17:
