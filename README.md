@@ -11,7 +11,7 @@ For our Monte Carlo Simulations we have built a Soft/Hard state when receiving c
 
 For our game the dealer is instructed that they must hit on anything lower than 17. Anything higher or equal to 17 they must stand on, this includes both soft and hard 17. For the program we check if anyone has an initial hand score of 21, before any other action is done. 
 
-As for expected net units please refer to [Expected Net Return and Monte Carlo Explanations](https://docs.google.com/document/d/103JBr-ownDSd63dBVNNg6Gm51m3ouOhEO3hXnW1Rpm4/edit?tab=t.0#heading=h.o7010k5jmm7p).
+As for expected net units please refer to [Expected Net Return and Monte Carlo Explanations](https://github.com/SamDant/ECE2260Project/tree/master#expected-net-return-and-monte-carlo-explanations).
 
 ## *How the Monte Carlo Simulation will work*
 
