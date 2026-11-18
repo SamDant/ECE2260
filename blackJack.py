@@ -163,7 +163,7 @@ def main():
             print()
             print("-----NEXT SIM-----")
             print(f"Player policy: hit below {sOn}; stand at {sOn} or higher.")
-            print(f"Hands: {stats[i]['hands']:,} | Seed: {SEED}")
+            print(f"Hands: {stats[i]['hands']:,} | Seed: {stats[i]['seed']}")
             print(f"Win rate:  {stats[i]['win_rate']:.2%} ({stats[i]['wins']:,} hands)")
             print(f"Loss rate: {stats[i]['loss_rate']:.2%} ({stats[i]['losses']:,} hands)")
             print(f"Push rate: {stats[i]['push_rate']:.2%} ({stats[i]['pushes']:,} hands)")
