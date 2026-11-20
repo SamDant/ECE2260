@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from blackJack import player_should_hit
-STAND_ON = 12 
+STAND_ON = 13 
 
 #Labels
 x_labels=[2,3,4,5,6,7,8,9,10,11]
